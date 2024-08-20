@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "2989204f-a807-4004-a59b-7775eee25775",
+		"name": "Products API",
+		"description": "# CRUD de Produtos | Documentação API | Projeto Semestral\n\n## Introdução\n\nA API \"CRUD de Produtos\" é projetada para gerenciar produtos em determinado estabelecimento. Esta API fornece funcionalidades para que seja possível o registro de novos produtos e o acesso de informações de produtos já existentes.\n\n> Esta API tem como objetivo simplificar o cadastro e a manipulação de produtos em aplicativos e sites focados em gerentes de estabelecimento de vendas. \n  \n\n### URL Base\n\nA URL base para todas as requisições à API é:\n\n[https://api.projeto-marcelo-lucas.com](https://api.projeto-marcelo-lucas.com)\n\n---\n\n## Autenticação\n\nNo momento atual, a API \"CRUD de Produtos\" não requer autenticação para as requisições de cadastro de produto. Entretanto, no futuro podem vir atualizações que podem implementar autenticação baseada em token para acessar outros endpoints/funcionalidades.\n\n---\n\n## Endpoints\n\nA API \"CRUD de Produtos\" suporta o seguinte endpoint para gerenciamento de produtos:\n\n- **POST /produtos**: Cria um novo produto no sistema.\n    \n\n---\n\n## Estrutura de Dados\n\nA estrutura de dados utilizada pela API \"CRUD de Produtos\" é o payload JSON para requisições e respostas.\n\n### Produto\n\n``` json\n{\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"price\": \"number\",\n    \"description\": \"string\",\n    \"disponnibility\": \"boolean\",\n    \"weight\": \"number\"\n}    \n\n ```\n\n## Códigos de Status e Exemplos de Erros\n\n### Códigos de Status\n\n- **200 OK**: A requisição foi bem-sucedida.\n    \n- **201 Created**: Um novo recurso foi criado com sucesso.\n    \n- **400 Bad Request**: A requisição foi inválida.\n    \n- **401 Unauthorized**: A autenticação falhou ou o token é inválido.\n    \n- **404 Not Found**: O recurso solicitado não foi encontrado.\n    \n- **500 Internal Server Error**: Ocorreu um erro no servidor.\n    \n\n### Exemplo de Erro\n\n``` json\n{\n    \"error\": \"Requisição inválida.\",\n    \"message\": \"O campo 'id' é obrigatório.\"\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34285293"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"uuid-de-id-do-produto\",\n    \"name\": \"nome-do-produto\",\n    \"price\": \"preco-do-produto\",\n    \"description\": \"descricao-do-produto\",\n    \"disponibility\": \"se-o-produto-esta-disponivel\",\n    \"weight\": \"peso-do-produto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/produto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"2789dbc0-9b84-4f26-af86-e9fc23c1efb6\",\n    \"name\": \"Heinekein Long Neck\",\n    \"price\": 7.00,\n    \"description\": \"Cerveja em garrafa de vidro verde.\",\n    \"disponibility\": true,\n    \"weight\": \"350g\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.productauth.com/user",
+									"protocol": "https",
+									"host": [
+										"api",
+										"productauth",
+										"com"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"productId\": \"2789dbc0-9b84-4f26-af86-e9fc23c1efb6\",\n    \"error\": null,\n    \"message\": \"Cadastro realizado com sucesso.\"\n}"
+						},
+						{
+							"name": "Invalid Id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"Cerveja\",\n    \"name\": \"Heinekein Long Neck\",\n    \"price\": 7.00,\n    \"description\": \"Cerveja em garrafa de vidro verde.\",\n    \"disponibility\": true,\n    \"weight\": \"350g\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid-id\",\n    \"message\": \"id invalido\",\n    \"reason\": \"formato de id incorreto\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.productauth.com"
+		}
+	]
+}
